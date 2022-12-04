@@ -9,14 +9,13 @@ export default function Modal({ selectedImage, closeModal }) {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  });
 
   const handleKeyDown = e => {
     if (e.code === 'Escape') {
       closeModal();
     }
   };
-
   const handleBackdropClick = e => {
     if (e.target === e.currentTarget) {
       closeModal();
