@@ -1,6 +1,4 @@
 import axios from 'axios';
-axios.defaults.baseURL = 'https://pixabay.com/api';
-const API_KEY = '29161019-6ea1164b9701eafe63306bc8a';
 
 export const getImages = async ({ request, page, controller }) => {
   const options = {
