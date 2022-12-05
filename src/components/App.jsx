@@ -3,12 +3,12 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Loader } from 'components/Loader/Loader';
 import { Wrapper } from './App.styled';
 
+import { getImages } from 'services/api';
 import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
 import ImageGalleryItem from './ImageGalleryItem/ImageGalleryItem';
 import Modal from './Modal/Modal';
 import LoadMoreButton from './Button/Button';
-import axios from 'axios';
 
 export const App = () => {
   const [request, setRequest] = useState('');
@@ -25,23 +25,13 @@ export const App = () => {
       async function select() {
         try {
           setIsLoadingImage(true);
-          const response = await axios.get('https://pixabay.com/api/', {
-            params: {
-              q: request,
-              page: page,
-              key: '30074653-21ce3b3057d55da5e0a16da3c',
-              image_type: 'photo',
-              orientation: 'horizontal',
-              per_page: '12',
-              signal: controller.signal,
-            },
-          });
-          if (response.data.hits.length === 0) {
+          const images = await getImages({ request, page, controller });
+          if (images.hits.length === 0) {
             Notify.info('забражень не знайдено');
             setActiveButton(false);
             return;
           }
-          setArrayObjects(prev => [...prev, ...response.data.hits]);
+          setArrayObjects(prev => [...prev, ...images.hits]);
 
           setActiveButton(true);
         } catch (eror) {
