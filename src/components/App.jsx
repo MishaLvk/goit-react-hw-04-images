@@ -3,7 +3,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Loader } from 'components/Loader/Loader';
 import { Wrapper } from './App.styled';
 
-import { getImages } from 'services/api';
+// import { getImages } from 'services/api';
 import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
 import ImageGalleryItem from './ImageGalleryItem/ImageGalleryItem';
@@ -25,12 +25,12 @@ export const App = () => {
       async function select() {
         try {
           setIsLoadingImage(true);
-          const images = await getImages({ request, page, controller });
-          if (images.hits.length === 0) {
-            Notify.info('забражень не знайдено');
-            setActiveButton(false);
-            return;
-          }
+          // const images = await getImages({ request, page, controller });
+          // if (images.hits.length === 0) {
+          //   Notify.info('забражень не знайдено');
+          //   setActiveButton(false);
+          //   return;
+          // }
           setArrayObjects(prev => [...prev, ...images.hits]);
 
           setActiveButton(true);
